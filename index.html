@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en-NG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f6b4f">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OluwaseyiDev: Navo and Telipress">
+<meta property="og:description" content="Navo and Telipress are Nigerian apps for data, airtime, electricity, cable TV, exam PINs, NIN checks, CAC registration and more. Built by OluwaseyiDev in Akure.">
+<meta name="twitter:card" content="summary">
+<title>OluwaseyiDev</title>
+<meta name="description" content="Navo and Telipress are Nigerian apps for data, airtime, electricity, cable TV, exam PINs, NIN checks, CAC registration and more. Built by OluwaseyiDev in Akure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* Layout: a split story. One builder, two products side by side; each product gets its own coloured band,
+     joined by receipts (the thing both apps hand people every day). */
+  :root {
+    --bg: #f3f5f2;          /* page ground, a faint green-grey */
+    --surface: #ffffff;
+    --ink: #121815;
+    --muted: #55605a;
+    --line: #d9dfda;
+    --navo: #2f6b4f;        /* Navo sage */
+    --navo-soft: #e4eee7;
+    --navo-ink: #f6f1e6;    /* Navo linen, text on sage */
+    --tele: #1d4fd8;        /* Telipress blue */
+    --tele-soft: #e3eafc;
+    --tele-ink: #ffffff;
+    --paper: #fffdf7;       /* receipt paper */
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(18, 24, 21, .06), 0 12px 32px rgba(18, 24, 21, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1411; --surface: #161e1a; --ink: #eef2ef; --muted: #a3b0a8; --line: #2a3530;
+      --navo: #3f8a66; --navo-soft: #17271f; --navo-ink: #f6f1e6;
+      --tele: #4d7cf2; --tele-soft: #141d33; --tele-ink: #ffffff;
+      --paper: #1c2420; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1411; --surface: #161e1a; --ink: #eef2ef; --muted: #a3b0a8; --line: #2a3530;
+    --navo: #3f8a66; --navo-soft: #17271f; --navo-ink: #f6f1e6;
+    --tele: #4d7cf2; --tele-soft: #141d33; --tele-ink: #ffffff;
+    --paper: #1c2420; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16.5px; line-height: 1.6; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.08; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--tele); outline-offset: 3px; border-radius: 6px; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Header */
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 19px; text-decoration: none; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 13px; font-weight: 600; }
+  nav.links { display: flex; gap: 22px; font-weight: 600; font-size: 15px; }
+  nav.links a { text-decoration: none; color: var(--muted); }
+  nav.links a:hover { color: var(--ink); }
+  @media (max-width: 720px) { nav.links { display: none; } }
+
+  /* Buttons */
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; border: 1.5px solid transparent; transition: transform .15s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.navo { background: var(--navo); color: var(--navo-ink); }
+  .btn.tele { background: var(--tele); color: var(--tele-ink); }
+  .btn.ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
+  .btn.on-dark { border-color: color-mix(in srgb, currentColor 40%, transparent); background: transparent; }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+
+  /* Hero */
+  .hero { padding-block: 56px 64px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: clamp(38px, 6vw, 68px); font-weight: 800; margin-top: 14px; }
+  .hero h1 .n { color: var(--navo); }
+  .hero h1 .t { color: var(--tele); }
+  .hero .lead { font-size: 19px; color: var(--muted); max-width: 56ch; margin-top: 20px; }
+  .hero .btns { margin-top: 28px; }
+  @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; gap: 36px; } .hero { padding-block: 36px 48px; } }
+
+  /* Receipts: the signature element */
+  .receipts { position: relative; display: grid; gap: 18px; justify-items: center; }
+  .receipt { width: min(100%, 340px); background: var(--paper); color: var(--ink); font-family: var(--mono); font-size: 13px; padding: 20px 20px 26px; border-radius: 6px 6px 0 0; box-shadow: var(--shadow); position: relative;
+    --tooth: 9px;
+    -webkit-mask: radial-gradient(circle var(--tooth) at 50% 100%, transparent 98%, #000) 50% 100% / calc(var(--tooth) * 2) 100% repeat-x;
+            mask: radial-gradient(circle var(--tooth) at 50% 100%, transparent 98%, #000) 50% 100% / calc(var(--tooth) * 2) 100% repeat-x; }
+  .receipt.r1 { transform: rotate(-2.2deg) translateX(-14px); }
+  .receipt.r2 { transform: rotate(1.6deg) translateX(18px); }
+  @media (max-width: 880px) { .receipt.r1, .receipt.r2 { transform: none; } }
+  .receipt .rhead { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px dashed var(--line); padding-bottom: 10px; margin-bottom: 10px; }
+  .receipt .rname { font-family: var(--display); font-weight: 800; font-size: 18px; }
+  .receipt.r1 .rname { color: var(--navo); }
+  .receipt.r2 .rname { color: var(--tele); }
+  .receipt dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; }
+  .receipt dt { color: var(--muted); }
+  .receipt dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .receipt .ok { margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed var(--line); display: flex; justify-content: space-between; font-weight: 600; }
+  .receipt .ok span:last-child { color: var(--navo); }
+  .receipt.r2 .ok span:last-child { color: var(--tele); }
+  .receipts .note { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+  /* Chooser */
+  .chooser { padding-block: 12px 72px; }
+  .chooser .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+  @media (max-width: 760px) { .chooser .grid { grid-template-columns: 1fr; } }
+  .pick { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+  .pick h3 { font-size: 26px; }
+  .pick.n h3 { color: var(--navo); } .pick.t h3 { color: var(--tele); }
+  .pick .for { font-weight: 600; }
+  .pick ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 4px; }
+  .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; }
+
+  /* Product bands */
+  .band { padding-block: 72px; }
+  .band.navo { background: var(--navo); color: var(--navo-ink); }
+  .band.tele { background: var(--tele); color: var(--tele-ink); }
+  .band .eyebrow { color: color-mix(in srgb, currentColor 75%, transparent); }
+  .band h2 { font-size: clamp(32px, 5vw, 54px); font-weight: 800; margin-top: 12px; }
+  .band .lead { font-size: 18.5px; max-width: 60ch; margin-top: 16px; opacity: .92; }
+  .band .btns { margin-top: 26px; }
+  .band .btn.solid-light { background: var(--navo-ink); color: var(--navo); }
+  .band.tele .btn.solid-light { background: #ffffff; color: #1d4fd8; }
+  .services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
+  @media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .svc { display: grid; gap: 4px; padding: 16px; border-radius: 12px; background: color-mix(in srgb, currentColor 9%, transparent); border: 1px solid color-mix(in srgb, currentColor 18%, transparent); text-decoration: none; min-width: 0; transition: background .15s ease; }
+  a.svc:hover { background: color-mix(in srgb, currentColor 16%, transparent); }
+  .svc b { font-size: 15.5px; }
+  .svc span { font-size: 13.5px; opacity: .82; }
+  .stats { display: flex; flex-wrap: wrap; gap: 14px 44px; margin-top: 36px; }
+  .stat b { display: block; font-family: var(--display); font-size: clamp(34px, 5vw, 50px); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+  .stat span { font-size: 14px; opacity: .85; }
+  .src { font-size: 12.5px; opacity: .7; margin-top: 10px; }
+
+  /* Partners */
+  .partners { padding-block: 72px; }
+  .partners .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+  @media (max-width: 900px) { .partners .grid { grid-template-columns: 1fr; } }
+  .p-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .p-card .tag { justify-self: start; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; }
+  .tag.n { background: var(--navo-soft); color: var(--navo); }
+  .tag.t { background: var(--tele-soft); color: var(--tele); }
+  .p-card h3 { font-size: 21px; }
+  .p-card p { color: var(--muted); }
+  .p-card .go { font-weight: 700; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+  .p-card .go.n { color: var(--navo); } .p-card .go.t { color: var(--tele); }
+  .p-card .go + .go { margin-top: -4px; }
+
+  /* About + contact */
+  .about { padding-block: 24px 80px; }
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 860px) { .about .wrap { grid-template-columns: 1fr; } }
+  .about h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-top: 10px; }
+  .about .story { display: grid; gap: 14px; margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 60ch; }
+  .contact { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 18px; min-width: 0; }
+  .contact h3 { font-size: 20px; }
+  .c-group { display: grid; gap: 8px; }
+  .c-group .label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .c-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+  .c-row .v { font-family: var(--mono); font-size: 14px; user-select: all; overflow-wrap: anywhere; min-width: 0; }
+  .copy { flex: none; font: 600 13px var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+  .copy[data-done] { color: var(--navo); border-color: var(--navo); }
+  .contact .hint { font-size: 13.5px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 26px 34px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+  footer a { color: var(--muted); }
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="OluwaseyiDev, back to top"><span class="brand-mark" aria-hidden="true">OD</span>OluwaseyiDev</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#navo">Navo</a>
+      <a href="#telipress">Telipress</a>
+      <a href="#partners">Partner with us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Built in Akure, Ondo State</p>
+        <h1>Two apps for the payments Nigerians make every day: <span class="n">Navo</span> and <span class="t">Telipress</span>.</h1>
+        <p class="lead">I’m Moses, a developer who goes by OluwaseyiDev. I build and run both apps. People use them to buy data and airtime, pay for electricity and cable TV, buy exam PINs and much more, from a phone, any time of day.</p>
+        <div class="btns">
+          <a class="btn navo" href="https://navo.com.ng/register" target="_blank" rel="noopener">Open Navo</a>
+          <a class="btn tele" href="https://play.google.com/store/apps/details?id=com.telipress" target="_blank" rel="noopener">Get Telipress on Google Play</a>
+          <a class="btn ghost" href="#partners">For businesses</a>
+        </div>
+      </div>
+
+      <div class="receipts" aria-label="Example receipts from Navo and Telipress">
+        <div class="receipt r1">
+          <div class="rhead"><span class="rname">Navo</span><span>ELECTRICITY</span></div>
+          <dl>
+            <dt>DisCo</dt><dd>Ikeja Electric</dd>
+            <dt>Meter</dt><dd>Prepaid</dd>
+            <dt>Amount</dt><dd>₦5,000.00</dd>
+            <dt>Token</dt><dd>4821 ···· ···· 0937</dd>
+          </dl>
+          <div class="ok"><span>Status</span><span>Delivered</span></div>
+        </div>
+        <div class="receipt r2">
+          <div class="rhead"><span class="rname">Telipress</span><span>DATA</span></div>
+          <dl>
+            <dt>Network</dt><dd>MTN</dd>
+            <dt>Plan</dt><dd>1GB · 30 days</dd>
+            <dt>Number</dt><dd>0803 ··· ·567</dd>
+            <dt>Paid from</dt><dd>Wallet</dd>
+          </dl>
+          <div class="ok"><span>Status</span><span>Successful</span></div>
+        </div>
+        <p class="note">Example receipts</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chooser" aria-labelledby="chooser-title">
+    <div class="wrap">
+      <h2 class="section-title" id="chooser-title">Which one is for you?</h2>
+      <div class="grid">
+        <div class="pick n">
+          <h3>Navo</h3>
+          <p class="for">If you want one app for almost everything you pay for.</p>
+          <ul>
+            <li>Data, airtime, electricity, cable TV and exam PINs</li>
+            <li>NIN and BVN checks, CAC business name registration</li>
+            <li>Travel eSIMs, flights and a virtual dollar card</li>
+            <li>Savings, student rooms and a marketplace</li>
+          </ul>
+          <div class="btns"><a class="btn navo" href="#navo">See Navo</a></div>
+        </div>
+        <div class="pick t">
+          <h3>Telipress</h3>
+          <p class="for">If you want fast, cheap data and airtime on Android.</p>
+          <ul>
+            <li>Data for MTN, Airtel, Glo and 9mobile</li>
+            <li>Airtime, and airtime to cash</li>
+            <li>Electricity, cable TV and result checker PINs</li>
+            <li>Gift cards and betting wallet funding</li>
+          </ul>
+          <div class="btns"><a class="btn tele" href="#telipress">See Telipress</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band navo" id="navo" aria-labelledby="navo-title">
+    <div class="wrap">
+      <p class="eyebrow">navo.com.ng</p>
+      <h2 id="navo-title">Navo: pay bills, verify, register, travel.</h2>
+      <p class="lead">Navo is an all-in-one money app. Fund your wallet by bank transfer, then pay for what you need in a few taps. It works in any browser on your phone or computer, and you can add it to your home screen.</p>
+      <div class="btns">
+        <a class="btn solid-light" href="https://navo.com.ng/register" target="_blank" rel="noopener">Create a free account</a>
+        <a class="btn on-dark" href="https://navo.com.ng/login" target="_blank" rel="noopener">Log in</a>
+      </div>
+      <div class="services">
+        <a class="svc" href="https://navo.com.ng/buy-data" target="_blank" rel="noopener"><b>Data bundles</b><span>All four networks</span></a>
+        <a class="svc" href="https://navo.com.ng/pay-electricity-bill" target="_blank" rel="noopener"><b>Electricity</b><span>Token sent instantly</span></a>
+        <a class="svc" href="https://navo.com.ng/nin-verification" target="_blank" rel="noopener"><b>NIN &amp; BVN checks</b><span>With the owner’s consent</span></a>
+        <a class="svc" href="https://navo.com.ng/cac-business-name-registration" target="_blank" rel="noopener"><b>CAC registration</b><span>Business names, online</span></a>
+        <a class="svc" href="https://navo.com.ng/travel-esim" target="_blank" rel="noopener"><b>Travel eSIM</b><span>Data abroad, paid in naira</span></a>
+        <a class="svc" href="https://navo.com.ng/book-flights" target="_blank" rel="noopener"><b>Flights</b><span>Local and international</span></a>
+        <a class="svc" href="https://navo.com.ng/virtual-dollar-card" target="_blank" rel="noopener"><b>Dollar card</b><span>Pay online in USD</span></a>
+        <a class="svc" href="https://navo.com.ng/student-rooms" target="_blank" rel="noopener"><b>Student rooms</b><span>Rooms and roommates near campus</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tele" id="telipress" aria-labelledby="tele-title">
+    <div class="wrap">
+      <p class="eyebrow">telipress.com</p>
+      <h2 id="tele-title">Telipress: fast, reliable data and airtime.</h2>
+      <p class="lead">Telipress is a VTU app built for speed and low prices. Top up any network, turn spare airtime into cash, and pay your everyday bills from one wallet.</p>
+      <div class="btns">
+        <a class="btn solid-light" href="https://play.google.com/store/apps/details?id=com.telipress" target="_blank" rel="noopener">Get it on Google Play</a>
+        <a class="btn on-dark" href="https://app.telipress.com/auth/register" target="_blank" rel="noopener">Create an account</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>562K+</b><span>successful transactions</span></div>
+        <div class="stat"><b>20K+</b><span>active users</span></div>
+      </div>
+      <p class="src">Figures as published on telipress.com.</p>
+      <div class="services">
+        <div class="svc"><b>Data</b><span>MTN, Airtel, Glo, 9mobile</span></div>
+        <div class="svc"><b>Airtime</b><span>Any network, any amount</span></div>
+        <div class="svc"><b>Airtime to cash</b><span>To your wallet or bank</span></div>
+        <div class="svc"><b>Electricity</b><span>Prepaid and postpaid</span></div>
+        <div class="svc"><b>Cable TV</b><span>DStv, GOtv, StarTimes</span></div>
+        <div class="svc"><b>Result checkers</b><span>WAEC, NECO, JAMB</span></div>
+        <div class="svc"><b>Gift cards</b><span>Popular brands</span></div>
+        <div class="svc"><b>Betting</b><span>Fund your betting wallet</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners" id="partners" aria-labelledby="partners-title">
+    <div class="wrap">
+      <p class="eyebrow">For businesses</p>
+      <h2 class="section-title" id="partners-title" style="margin-top:10px">Sell what we sell, or build on it.</h2>
+      <div class="grid">
+        <div class="p-card">
+          <span class="tag n">Navo API</span>
+          <h3>For developers and fintechs</h3>
+          <p>One API for airtime, data, bills, NIN and BVN checks, CAC, eSIMs, flights, gift cards and dollar cards, paid from one prepaid balance. You set your own prices.</p>
+          <a class="go n" href="https://navo.com.ng/developers" target="_blank" rel="noopener">See the Navo API →</a>
+          <a class="go n" href="https://navo-1.gitbook.io/navo-docs/" target="_blank" rel="noopener">Read the docs →</a>
+        </div>
+        <div class="p-card">
+          <span class="tag n">Navo for Business</span>
+          <h3>Your keys, balance and sales in one place</h3>
+          <p>Apply from your Navo account. Once approved, make your own test and live keys, top up your API balance from your wallet and watch every sale.</p>
+          <a class="go n" href="https://navo.com.ng/business" target="_blank" rel="noopener">Open Navo for Business →</a>
+        </div>
+        <div class="p-card">
+          <span class="tag t">Telipress merchants</span>
+          <h3>For resellers and agents</h3>
+          <p>Buy data and airtime in volume from the Telipress merchant dashboard and sell to your own customers. Already a merchant? Log in.</p>
+          <a class="go t" href="https://app.telipress.com/auth/register" target="_blank" rel="noopener">Become a merchant →</a>
+          <a class="go t" href="https://app.telipress.com/auth/login" target="_blank" rel="noopener">Merchant login →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="contact" aria-labelledby="about-title">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">One developer, building for people nearby first.</h2>
+        <div class="story">
+          <p>I build and run both apps from Akure. Telipress is a quick, low-cost way to buy data and airtime. Navo is a full money app: bills, identity checks, business registration, travel and student life.</p>
+          <p>I’m open to partnerships with businesses, schools and agents, and to conversations with investors who want to help these apps reach more people.</p>
+          <div class="btns" style="margin-top:6px">
+            <a class="btn ghost" href="https://oluwaseyidev.vercel.app" target="_blank" rel="noopener">See my portfolio</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact" aria-label="Contact details">
+        <h3>Talk to us</h3>
+        <div class="c-group">
+          <span class="label">Partnerships, investment, Navo</span>
+          <div class="c-row"><span class="v" id="c1">support@navo.com.ng</span><button class="copy" type="button" data-copy="c1">Copy</button></div>
+          <div class="c-row"><span class="v" id="c2">+234 813 575 5379</span><button class="copy" type="button" data-copy="c2">Copy</button></div>
+        </div>
+        <div class="c-group">
+          <span class="label">Telipress</span>
+          <div class="c-row"><span class="v" id="c3">Telipresspromotion@gmail.com</span><button class="copy" type="button" data-copy="c3">Copy</button></div>
+          <div class="c-row"><span class="v" id="c4">+234 806 948 4884</span><button class="copy" type="button" data-copy="c4">Copy</button></div>
+        </div>
+        <p class="hint">Copy an email or number, then send it from your own email or WhatsApp.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> OluwaseyiDev · Akure, Nigeria</span>
+    <span><a href="https://navo.com.ng" target="_blank" rel="noopener">navo.com.ng</a> · <a href="https://telipress.com" target="_blank" rel="noopener">telipress.com</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.dataset.copy);
+      var text = el.textContent.trim();
+      var done = function () { b.textContent = 'Copied'; b.setAttribute('data-done', ''); setTimeout(function () { b.textContent = 'Copy'; b.removeAttribute('data-done'); }, 1800); };
+      var select = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, select);
+        else select();
+      } catch (e) { select(); }
+    });
+  });
+</script>
+</body>
+</html>
